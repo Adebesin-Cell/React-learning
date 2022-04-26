@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import Button from "./components/UI/Button/Button";
+import React, { useState, useCallback, useMemo } from "react";
+
 import "./App.css";
+import DemoList from "./components/Demo/DemoList";
+import Button from "./components/UI/Button/Button";
 
 function App() {
-  const [showParagraph, setShowPragraph] = useState(false);
+  const [listTitle, setListTitle] = useState("My List");
 
-  console.log("APP RUNNING");
+  const changeTitleHandler = useCallback(() => {
+    setListTitle("New Title");
+  }, []);
 
-  const toggleParagraphHandler = function () {
-    setShowPragraph((prevShow) => !prevShow);
-  };
+  const listItems = useMemo(() => [5, 4, 3, 2, 1, 10, 9], []);
 
   return (
     <div className='app'>
-      <h1>Hi there!</h1>
-      {showParagraph && <p>This is new!</p>}
-      <Button onClick={toggleParagraphHandler}>Toggle Paragraph! </Button>
+      <DemoList title={listTitle} items={listItems} />
+      <Button onClick={changeTitleHandler}>Change List Title</Button>
     </div>
   );
 }
