@@ -1,10 +1,23 @@
 import UserFinder from "./components/UserFinder";
+import UsersContext from "./store/users-context";
+
+const DUMMY_USERS = [
+  { id: "u1", name: "Max" },
+  { id: "u2", name: "Manuel" },
+  { id: "u3", name: "Julie" },
+  { id: "u4", name: "Aomine" },
+  { id: "u5", name: "Jane" },
+];
 
 function App() {
+  const userContext = {
+    users: DUMMY_USERS,
+  };
+
   return (
-    <div>
-      <UserFinder />
-    </div>
+    <UsersContext.Provider value={userContext}>
+      <UserFinder></UserFinder>
+    </UsersContext.Provider>
   );
 }
 
